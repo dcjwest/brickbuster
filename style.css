@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('fonts/seguisym.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Impact';
+  src: url('fonts/impact.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+	font-family: 'Impact', 'Segoe UI', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+body {
+	background: url('brickwall-bg-md.jpeg');
+	background-size: cover;
+}
+#myCanvas {
+	background: #DDD;
+	border: 7px double #555;
+	display: block;
+	margin: 0 auto;
+}
+.container {
+	margin: 0 auto;
+	position: relative;
+	width: 90%;
+}
+h1 {
+	color: #FFD800/*AF0000*/;
+	font-size: 130px;
+	margin: 0;
+	margin-right: 3%;
+	text-align: center;
+	text-shadow: 5px 5px 0 #000;
+}
+.rotate-txt {
+	display: inline-block;
+	width: auto;
+	transform: rotate(-90deg);
+}
+.brick {
+	color: #F00;
+	font-size: 50px;
+	text-decoration: overline dashed;
+	text-shadow: 2px 2px 0 #555, -2px 2px 0 #555, 2px -2px 0 #555, -2px -2px 0 #555, -7px 7px 3px #000;
+}
+.buster {
+	text-shadow: 3px 3px 0 #555, -3px 3px 0 #555, 3px -3px 0 #555, -3px -3px 0 #555, 12px 12px 4px #000;
+	text-transform: uppercase;
+}
+#canvas-container {
+	width: 600px;
+}
+#msgBox {
+	color: #F00;
+	display: inline-block;
+	font-size: 25px;
+	letter-spacing: 1px;
+	position: absolute;
+	top: 40%;
+	text-align: center;
+	text-shadow: 1px 1px 0 #222, -1px 1px 0 #222, 1px -1px 0 #222, -1px -1px 0 #222, 2px 2px 0 #000;
+	width: 600px;
+	z-index: 5;
+}
+#replay {
+	box-shadow: 2px 2px 2px #555;
+	display: none;
+	font-size: 20px;
+	margin-top: 0;
+	padding: 5px 10px;
+	width: 90px;
+}
+#replay:after {
+	content: 'Replay?';
+}
+#replay:hover:after {
+	color: #F00;
+	content: 'YEAH!';
+	cursor: pointer;
+}
+#btnBox {
+	bottom: 40%;
+	display: inline-block;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+#instructions {
+	color: #000;
+	font-family: 'Segoe UI', sans-serif;
+	font-size: 20px;
+	letter-spacing: 0;
+	text-shadow: none;
+}
+.bg-yellow {background: yellow;}
+.bg-purple {background: purple;}
+
+.animate {
+	animation: gameOver .4s linear infinite alternate;
+}
+@keyframes gameOver {
+	from {font-size: 20px;}
+	to {font-size: 30px; letter-spacing: 5px;}
+}
