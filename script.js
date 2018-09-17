@@ -99,7 +99,7 @@ $(function(){
 		if(relativeX > 0 && relativeX < canvas.width){
 			paddle_X = relativeX - paddleWidth;
 		}
-		event.preventDefault();
+		// event.preventDefault();
 	}
 
 	function togglePause(){
