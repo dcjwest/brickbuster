@@ -90,7 +90,7 @@ $(function(){
 	function detectTouch(event){
 		touchObj = event.changedTouches[0];
 		touchStartX = parseInt(touchObj.clientX);
-		event.preventDefault();
+		// event.preventDefault();
 	}
 
 	function touchHandler(event){
