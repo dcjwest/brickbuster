@@ -94,7 +94,7 @@ $(function(){
 
 	function touchHandler(event){
 		touchObj = event.changedTouches[0];
-		var relativeX = parseInt(touchObj.clientX) - touchStartX;
+		var relativeX = parseInt(touchObj.clientX);
 		if(relativeX > 0 && relativeX < canvas.width){
 			paddle_X = relativeX - paddleWidth;
 		}
