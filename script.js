@@ -26,6 +26,9 @@ $(function(){
 	//User input variables
 	var rightPressed = false;
 	var leftPressed = false;
+	//Touch variables
+	var touchObj = null;
+	var touchStartX = 0;
 	//Brick variables
 	var brickWidth = 75;
 	var brickHeight = 20;
@@ -49,6 +52,8 @@ $(function(){
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("mousemove", mouseHandler, false);
 	canvas.addEventListener("click", togglePause, false);
+	canvas.addEventListener("touchstart", detectTouch);
+	canvas.addEventListener("touchmove", touchHandler);
 
 	//Draw the initial layout. Game is triggered by clicking on the canvas
 	draw();
@@ -80,6 +85,21 @@ $(function(){
 		if(relativeX > 0 && relativeX < canvas.width){
 			paddle_X = relativeX - paddleWidth;
 		}
+	}
+
+	function detectTouch(event){
+		touchObj = event.changedTouches[0];
+		touchStartX = parseInt(touchObj.clientX);
+		event.preventDefault();
+	}
+
+	function touchHandler(event){
+		touchObj = event.changedTouches[0];
+		var relativeX = parseInt(touchObj.clientX) - touchStartX;
+		if(relativeX > 0 && relativeX < canvas.width){
+			paddle_X = relativeX - paddleWidth;
+		}
+		event.preventDefault();
 	}
 
 	function togglePause(){
