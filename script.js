@@ -90,7 +90,6 @@ $(function(){
 	function detectTouch(event){
 		touchObj = event.changedTouches[0];
 		touchStartX = parseInt(touchObj.clientX);
-		// event.preventDefault();
 	}
 
 	function touchHandler(event){
@@ -99,7 +98,6 @@ $(function(){
 		if(relativeX > 0 && relativeX < canvas.width){
 			paddle_X = relativeX - paddleWidth;
 		}
-		// event.preventDefault();
 	}
 
 	function togglePause(){
