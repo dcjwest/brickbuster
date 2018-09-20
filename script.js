@@ -1,6 +1,8 @@
 $(function(){
 	//Canvas Variables
 	var canvas = $('#myCanvas')[0];
+	canvas.height = (window.innerHeight > 0) ? window.innerHeight*0.65 : screen.height*0.65;
+	console.log(canvas.height);
 	var canvasMsg = $('#msg');
 	var replayBtn = $('#replay');
 	var ctx = canvas.getContext('2d');
@@ -30,10 +32,10 @@ $(function(){
 	var touchObj = null;
 	var touchStartX = 0;
 	//Brick variables
-	var brickWidth = 75;
+	var brickWidth = 78;
 	var brickHeight = 20;
 	var brickRows = 3;
-	var brickColumns = 6;
+	var brickColumns = 8;
 	var brickPadding = 10;
 	var brickTopOffset = 30;
 	var brickLeftOffset = 50;

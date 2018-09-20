@@ -8,15 +8,21 @@
 	<style></style>
 </head>
 <body>
-
-	<div id="heading-container" class="container">
-		<h1><div class="rotate-txt"><span class="brick">Brick</span></div><span class="buster">Buster!</span></h1>
-	</div>
-	<div id="canvas-container" class="container">
-		<canvas id="myCanvas" width="600" height="400"></canvas>
-		<div id="msgBox"><p id="msg">Click the screen / Press Enter to start!<br><span id="instructions">Control paddle with mouse or keyboard L/R buttons</span></p></div>
-		<div id='btnBox'><button id="replay"></button></div>
-	</div>
+	<section>
+		<div class="container">
+			<div id="heading-container">
+				<h1><div class="rotate-txt"><span class="brick">Brick</span></div><span class="buster">Buster!</span></h1>
+				<p id="warning">Please rotate your device to Landscape Mode to play!</p>
+			</div>
+			<div id="canvas-container">
+				<canvas id="myCanvas" width="800px" height="430px"></canvas>
+				<div id="msgBox">
+					<p id="msg">Click/Touch the screen to start!<br><span id="instructions">Control paddle with mouse, keyboard L/R buttons, or touch-and-drag.</span></p>
+				</div>
+				<div id='btnBox'><button id="replay"></button></div>
+			</div>
+		</div>
+	</section>
 
 	<script type="text/javascript" src="jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="script.js"></script>
