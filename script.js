@@ -1,8 +1,7 @@
 $(function(){
+	var screenWidth = window.screen.width;
 	//Canvas Variables
 	var canvas = $('#myCanvas')[0];
-	canvas.height = (window.innerHeight > 0) ? window.innerHeight*0.65 : screen.height*0.65;
-	console.log(canvas.height);
 	var canvasMsg = $('#msg');
 	var replayBtn = $('#replay');
 	var ctx = canvas.getContext('2d');
@@ -40,6 +39,18 @@ $(function(){
 	var brickTopOffset = 30;
 	var brickLeftOffset = 50;
 	var brickArr = [];
+
+	//Re-initialize canvas dimensions and object parameters for small mobile device
+	if (screenWidth < 330){
+		canvas.width = 600;
+		canvas.height = 280;
+		brickColumns = 6;
+		brickWidth = 75;
+		brickHeight = 15;
+		ball_X = (canvas.width)/2;
+		ball_Y = (canvas.height)-30;
+		paddle_X = (canvas.width - paddleWidth)/2;
+	}
 
 	//Initialize brick stack
 	for(var c = 0; c < brickColumns; c++){
