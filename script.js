@@ -1,5 +1,4 @@
 $(function(){
-	var screenWidth = window.screen.width;
 	//Canvas Variables
 	var canvas = $('#myCanvas')[0];
 	var canvasMsg = $('#msg');
@@ -8,22 +7,15 @@ $(function(){
 	var timer;
 	var timer_ON = false;
 	var score = 0;
-	var lives = 3;
+	var lives = 1;
 	var manDown = false;
 	var gameOver = false;
 	//Ball variables
-	var ballRadius = 10;
-	var ball_X = (canvas.width)/2;
-	var ball_Y = (canvas.height)-30;
 	var ballSpeed = 1.5;
 	var ball_dx = ballSpeed;
 	var ball_dy = -ballSpeed;
 	var ballColour = "yellow";
 	var ballCollision = false;
-	//Paddle variables
-	var paddleHeight = 10;
-	var paddleWidth = 75;
-	var paddle_X = (canvas.width - paddleWidth)/2;
 	//User input variables
 	var rightPressed = false;
 	var leftPressed = false;
@@ -31,26 +23,47 @@ $(function(){
 	var touchObj = null;
 	var touchStartX = 0;
 	//Brick variables
-	var brickWidth = 78;
-	var brickHeight = 20;
 	var brickRows = 3;
 	var brickColumns = 8;
-	var brickPadding = 10;
-	var brickTopOffset = 30;
-	var brickLeftOffset = 50;
 	var brickArr = [];
 
-	//Re-initialize canvas dimensions and object parameters for small mobile device
-	if (screenWidth < 330){
-		canvas.width = 600;
-		canvas.height = 280;
-		brickColumns = 6;
-		brickWidth = 75;
-		brickHeight = 15;
-		ball_X = (canvas.width)/2;
-		ball_Y = (canvas.height)-30;
+	function initCanvasVars(){
+		brickWidth = 0.1*canvas.width;
+		brickHeight = 0.045*canvas.height;
+		brickPadding = 0.012*canvas.width;
+		brickTopOffset = 0.09*canvas.height;
+		brickLeftOffset = 0.06*canvas.width;
+		paddleHeight = 0.03*canvas.height;
+		paddleWidth = 0.15*canvas.width;
 		paddle_X = (canvas.width - paddleWidth)/2;
+		ballRadius = 0.9*paddleHeight;
+		ball_X = (canvas.width)/2;
+		ball_Y = (canvas.height)-3*paddleHeight;
 	}
+
+	function resizeCanvas(){
+		var width = (window.innerWidth > window.innerHeight)? window.innerWidth : window.innerHeight;
+		var height = (window.innerWidth < window.innerHeight)? window.innerWidth : window.innerHeight;
+		canvas.width = 0.85*width;
+		canvas.height = 0.75*height;
+		initCanvasVars();
+	}
+
+	function switchDims(){
+		var temp = canvas.width;
+		canvas.width = canvas.height;
+		canvas.height = temp;
+	}
+
+	//Event Listeners
+	window.addEventListener("resize", resizeCanvas, false);
+	window.addEventListener("orientationchange", switchDims, false);
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+	document.addEventListener("mousemove", mouseHandler, false);
+	canvas.addEventListener("click", togglePause, false);
+	canvas.addEventListener("touchstart", detectTouch);
+	canvas.addEventListener("touchmove", touchHandler);
 
 	//Initialize brick stack
 	for(var c = 0; c < brickColumns; c++){
@@ -60,15 +73,8 @@ $(function(){
 		}
 	}
 
-	//Event Listeners
-	document.addEventListener("keydown", keyDownHandler, false);
-	document.addEventListener("keyup", keyUpHandler, false);
-	document.addEventListener("mousemove", mouseHandler, false);
-	canvas.addEventListener("click", togglePause, false);
-	canvas.addEventListener("touchstart", detectTouch);
-	canvas.addEventListener("touchmove", touchHandler);
-
-	//Draw the initial layout. Game is triggered by clicking on the canvas
+	//Adjust canvas to viewport and draw the initial layout. Game is triggered by clicking on the canvas
+	resizeCanvas();
 	draw();
 
 	//Event handlers for controlling paddle movement
@@ -119,7 +125,7 @@ $(function(){
 				timer_ON = false;
 				clearInterval(timer);
 				if(manDown){
-					canvasMsg.html('Click/Press Enter to Try Again').show();
+					canvasMsg.html('Click/Tap to try again').show();
 				}
 				else {
 					canvasMsg.html('Game Paused (P)').show();
@@ -192,7 +198,7 @@ $(function(){
 
 	function drawPaddle(){
 		ctx.beginPath();
-		ctx.rect(paddle_X, canvas.height-(paddleHeight+10), paddleWidth, paddleHeight);
+		ctx.rect(paddle_X, canvas.height-(2*paddleHeight), paddleWidth, paddleHeight);
 		ctx.fillStyle = "#333";
 		ctx.fill();
 		ctx.strokeStyle = "#000";
@@ -238,14 +244,16 @@ $(function(){
 		if (manDown){
 			togglePause();
 			manDown = false;
+			if (ball_dy){ball_dy = -ball_dy;}
 		}
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		//Draw canvas components
 		drawBricks();
 		drawBall();
 		drawPaddle();
 		drawScore();
 		drawLives();
-		//Handle collision detection
+		//Handle brick-collision detection
 		detectCollision();
 		//Collision with either right or left wall
 		if(ball_X + ball_dx > canvas.width - ballRadius || ball_X + ball_dx < ballRadius){
@@ -264,17 +272,17 @@ $(function(){
 		//Ball falls out of bounds
 		if(ball_Y > canvas.height + ballRadius){
 			lives--;
-			if(!lives){
+			if(lives < 0){
 				gameOver = true;
 				clearInterval(timer);
 				canvasMsg.addClass('animate').html('GAME OVER!').show();
 				replayBtn.show();
-				replayBtn.on('click', function(){document.location.reload();})
+				replayBtn.on('click', restartGame);
 			}
 			else{
 				manDown = true;
 				ball_X = (canvas.width)/2;
-				ball_Y = (canvas.height)-30;
+				ball_Y = (canvas.height)-3*paddleHeight;
 				paddle_X = (canvas.width - paddleWidth)/2;
 			}
 		}
@@ -288,5 +296,25 @@ $(function(){
 		//Increment ball position coordinates i.e. make ball move
 		ball_X += ball_dx;
 		ball_Y += ball_dy;
+	}
+
+	function restartGame(){
+		replayBtn.hide();
+		canvasMsg.removeClass('animate');
+
+		for(var c = 0; c < brickColumns; c++){
+			brickArr[c] = [];
+			for(var r = 0; r < brickRows; r++){
+				brickArr[c][r] = {x:0, y:0, status:1};
+			}
+		}
+
+		initCanvasVars();
+		gameOver = false;
+		manDown = true;
+		lives = 1;
+		score = 0;
+		draw();
+		togglePause();
 	}
 });
