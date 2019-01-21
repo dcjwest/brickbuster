@@ -7,11 +7,11 @@ $(function(){
 	var timer;
 	var timer_ON = false;
 	var score = 0;
-	var lives = 1;
+	var lives = 2;
 	var manDown = false;
 	var gameOver = false;
 	//Ball variables
-	var ballSpeed = 1.5;
+	var ballSpeed = 2;
 	var ball_dx = ballSpeed;
 	var ball_dy = -ballSpeed;
 	var ballColour = "yellow";
@@ -27,6 +27,7 @@ $(function(){
 	var brickColumns = 8;
 	var brickArr = [];
 
+	//Initialise canvas variables
 	function initCanvasVars(){
 		brickWidth = 0.1*canvas.width;
 		brickHeight = 0.045*canvas.height;
@@ -41,6 +42,7 @@ $(function(){
 		ball_Y = (canvas.height)-3*paddleHeight;
 	}
 
+	//Screen-responsive canvas
 	function resizeCanvas(){
 		var width = (window.innerWidth > window.innerHeight)? window.innerWidth : window.innerHeight;
 		var height = (window.innerWidth < window.innerHeight)? window.innerWidth : window.innerHeight;
@@ -156,7 +158,7 @@ $(function(){
 							clearInterval(timer);
 							canvasMsg.addClass('animate').html('YOU WIN! CONGRATULATIONS!').show();
 							replayBtn.show();
-							replayBtn.on('click', function(){document.location.reload();});
+							replayBtn.on('click', restartGame);
 						}
 					}
 				}
@@ -312,7 +314,7 @@ $(function(){
 		initCanvasVars();
 		gameOver = false;
 		manDown = true;
-		lives = 1;
+		lives = 2;
 		score = 0;
 		draw();
 		togglePause();
