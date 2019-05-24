@@ -7,7 +7,7 @@ $(function(){
 	var timer;
 	var timer_ON = false;
 	var score = 0;
-	var lives = 2;
+	var lives = 3;
 	var manDown = false;
 	var gameOver = false;
 	//Ball variables
