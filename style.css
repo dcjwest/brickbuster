@@ -42,7 +42,7 @@ section {
 	font-size: 8vw;
 	position: relative;
 	text-align: center;
-	text-shadow: 5px 5px 0 #000;
+	text-shadow: 5px 5px 0 #000 !important;
 }
 
 #logo div {
@@ -55,14 +55,14 @@ section {
 	position: absolute;
 	bottom: 50%;
 	text-decoration: overline dashed;
-	text-shadow: 2px 2px 0 #555, -2px 2px 0 #555, 2px -2px 0 #555, -2px -2px 0 #555, -7px 7px 3px #000;
+	text-shadow: 2px 2px 0 #555, -2px 2px 0 #555, 2px -2px 0 #555, -2px -2px 0 #555, -7px 7px 3px #000 !important;
 	transform: rotate(-90deg) translate(-50%, 0);
 	transform-origin: bottom left;
 }
 
 .level-txt {
 	position: relative;
-	text-shadow: 3px 3px 0 #555, -3px 3px 0 #555, 3px -3px 0 #555, -3px -3px 0 #555, 12px 12px 4px #000;
+	text-shadow: 3px 3px 0 #555, -3px 3px 0 #555, 3px -3px 0 #555, -3px -3px 0 #555, 12px 12px 4px #000 !important;
 }
 
 #myCanvas {
@@ -77,7 +77,7 @@ section {
 	letter-spacing: 1px;
 	margin: 0;
 	text-align: center;
-	text-shadow: 2px 2px 0 #222, -2px 2px 0 #222, 2px -2px 0 #222, -2px -2px 0 #222, 2px 2px 0 #000;
+	text-shadow: 2px 2px 0 #222, -2px 2px 0 #222, 2px -2px 0 #222, -2px -2px 0 #222, 2px 2px 0 #000 !important;
 }
 
 #msgBox {
@@ -91,7 +91,7 @@ section {
 	top: 40%;
 	transform: translate(-50%, 0);
 	text-align: center;
-	text-shadow: 1px 1px 0 #222, -1px 1px 0 #222, 1px -1px 0 #222, -1px -1px 0 #222, 2px 2px 0 #000;
+	text-shadow: 1px 1px 0 #222, -1px 1px 0 #222, 1px -1px 0 #222, -1px -1px 0 #222, 2px 2px 0 #000 !important;
 	width: 95%;
 	z-index: 5;
 }
@@ -101,13 +101,14 @@ section {
 	font-family: 'Segoe UI', sans-serif;
 	font-size: 19px;
 	letter-spacing: 0;
-	text-shadow: none;
+	text-shadow: none !important;
 }
 
 #btnBox {
-	bottom: 40%;
-	display: inline-block;
 	position: absolute;
+	bottom: 40%;
+	left: 50%;
+	transform: translate(-50%, 0);
 	text-align: center;
 	width: 100%;
 }

@@ -7,7 +7,7 @@ $(function(){
 	var timer;
 	var timer_ON = false;
 	var score = 0;
-	var lives = 3;
+	var lives = 2;
 	var manDown = false;
 	var gameOver = false;
 	//Ball variables
@@ -167,14 +167,14 @@ $(function(){
 	}
 
 	function drawBall(){
+		ctx.strokeStyle = "#000";
+		ctx.lineWidth = 1;
 		if(ballCollision){
-			newColour = colourBall();
+			var newColour = colourBall();
+			ctx.fillStyle = newColour;
 			ctx.beginPath();
 			ctx.arc(ball_X, ball_Y, ballRadius, 0, Math.PI*2);
-			ctx.fillStyle = newColour;
 			ctx.fill();
-			ctx.strokeStyle = "#000";
-			ctx.lineWidth = 2;
 			ctx.stroke();
 			ctx.closePath();
 			ballCollision = false;
@@ -186,6 +186,7 @@ $(function(){
 			ctx.arc(ball_X, ball_Y, ballRadius, 0, Math.PI*2);
 			ctx.fillStyle = ballColour;
 			ctx.fill();
+			ctx.stroke();
 			ctx.closePath();
 			ballCollision = false;
 		}
@@ -233,20 +234,22 @@ $(function(){
 	function drawScore(){
 		ctx.font = "16px Comic Sans MS";
 		ctx.fillStyle = "black";
-		ctx.fillText("Score: "+score, 8, 20);
+		ctx.fillText("Score: "+score, 10, 20);
 	}
 
 	function drawLives(){
 		ctx.font = "16px Comic Sans MS";
 		ctx.fillStyle = "black";
-		ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+		ctx.fillText("Lives Left: "+lives, canvas.width - 105, 20);
 	}
 
 	function draw(){
 		if (manDown){
 			togglePause();
 			manDown = false;
-			if (ball_dy){ball_dy = -ball_dy;}
+			// if (ball_dy){ball_dy = -ball_dy;}
+			ball_dy = -ballSpeed;
+
 		}
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		//Draw canvas components
