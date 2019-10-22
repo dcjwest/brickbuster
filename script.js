@@ -247,9 +247,7 @@ $(function(){
 		if (manDown){
 			togglePause();
 			manDown = false;
-			// if (ball_dy){ball_dy = -ball_dy;}
 			ball_dy = -ballSpeed;
-
 		}
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		//Draw canvas components
@@ -286,6 +284,7 @@ $(function(){
 			}
 			else{
 				manDown = true;
+				ball_dy = -ballSpeed;
 				ball_X = (canvas.width)/2;
 				ball_Y = (canvas.height)-3*paddleHeight;
 				paddle_X = (canvas.width - paddleWidth)/2;
@@ -320,6 +319,5 @@ $(function(){
 		lives = 2;
 		score = 0;
 		draw();
-		togglePause();
 	}
 });
