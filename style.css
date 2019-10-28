@@ -55,14 +55,14 @@ section {
 	position: absolute;
 	bottom: 50%;
 	text-decoration: overline dashed;
-	text-shadow: 2px 2px 0 #555, -2px 2px 0 #555, 2px -2px 0 #555, -2px -2px 0 #555, -7px 7px 3px #000 !important;
+	text-shadow: 2px 2px 0 #555, -2px 2px 0 #555, 2px -2px 0 #555, -2px -2px 0 #555, -7px 7px 3px rgba(0,0,0,0.8) !important;
 	transform: rotate(-90deg) translate(-50%, 0);
 	transform-origin: bottom left;
 }
 
 .level-txt {
 	position: relative;
-	text-shadow: 3px 3px 0 #555, -3px 3px 0 #555, 3px -3px 0 #555, -3px -3px 0 #555, 12px 12px 4px #000 !important;
+	text-shadow: 3px 3px 0 #555, -3px 3px 0 #555, 3px -3px 0 #555, -3px -3px 0 #555, 12px 12px 4px rgba(0,0,0,0.8) !important;
 }
 
 #myCanvas {
@@ -114,6 +114,7 @@ section {
 }
 #replay {
 	box-shadow: 2px 2px 2px #555;
+	cursor: pointer;
 	display: none;
 	font-size: 20px;
 	margin-top: 0;
@@ -128,7 +129,6 @@ section {
 #replay:hover:after {
 	color: #F00;
 	content: 'YEAH!';
-	cursor: pointer;
 }
 
 .animate {

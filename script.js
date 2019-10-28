@@ -14,8 +14,9 @@ $(function(){
 	var ballSpeed = 2;
 	var ball_dx = ballSpeed;
 	var ball_dy = -ballSpeed;
-	var ballColour = "yellow";
 	var ballCollision = false;
+	var ballColour = "#00FF00";
+	var coloursArr = ["#000000", "#FF0009", "#FF3300", "#FFFF00", "#00FF00", "#0560FF", "#6600FF", "#FF0066", "#FFFFFF"];
 	//User input variables
 	var rightPressed = false;
 	var leftPressed = false;
@@ -194,9 +195,9 @@ $(function(){
 
 	//Change ball colour every time it hits a brick
 	function colourBall(){
-		var coloursArr = new Array("black", "red", "orange", "yellow", "green", "blue", "purple");
-		var randNum = Math.floor(Math.random()*6+1);
-		return coloursArr[randNum];
+		var randNum = Math.floor(Math.random()*8+1);
+		var nextColour = coloursArr[randNum]
+		return ballColour === nextColour? coloursArr[0] : nextColour;
 	}
 
 	function drawPaddle(){
@@ -232,15 +233,15 @@ $(function(){
 	}
 
 	function drawScore(){
-		ctx.font = "16px Comic Sans MS";
+		ctx.font = "18px Impact";
 		ctx.fillStyle = "black";
 		ctx.fillText("Score: "+score, 10, 20);
 	}
 
 	function drawLives(){
-		ctx.font = "16px Comic Sans MS";
+		ctx.font = "18px Impact";
 		ctx.fillStyle = "black";
-		ctx.fillText("Lives Left: "+lives, canvas.width - 105, 20);
+		ctx.fillText("Lives: "+lives, canvas.width - 65, 20);
 	}
 
 	function draw(){
